@@ -150,6 +150,7 @@ def main():
 
     wb = load_workbook(args.output)
     style_sheet(wb["Данные"], money_cols=("Цена", "Сумма"), date_cols=("Дата",))
+    wb["Данные"].auto_filter.ref = wb["Данные"].dimensions
     style_sheet(wb["Сводная"], money_cols=list(pivot.columns))
     for cell in wb["Сводная"][wb["Сводная"].max_row]:
         cell.font = Font(bold=True)
