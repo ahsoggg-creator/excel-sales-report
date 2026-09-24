@@ -95,7 +95,7 @@ def style_sheet(ws, money_cols=(), date_cols=()):
     for col in ws.columns:
         letter = col[0].column_letter
         width = max(len(str(c.value)) if c.value is not None else 0 for c in col)
-        ws.column_dimensions[letter].width = min(width + 3, 40)
+        ws.column_dimensions[letter].width = min(width + 5, 40)
         header = col[0].value
         for cell in col[1:]:
             if header in money_cols:
@@ -109,6 +109,11 @@ def add_chart(ws, rows, month_count):
     chart = BarChart()
     chart.title = "Выручка по филиалам по месяцам"
     chart.y_axis.title = "руб."
+    chart.y_axis.number_format = "#,##0"
+    chart.x_axis.delete = False
+    chart.y_axis.delete = False
+    chart.legend.position = "b"
+    chart.legend.overlay = False
     chart.height = 10
     chart.width = 22
 
